@@ -21,7 +21,6 @@ int main(){
     //string path = year+"\\"+mounth;
     string pathSource = "\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\"+year+"\\"+mounth; /// source
 
-
     string pathDestination = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth; /// destination
 
 
@@ -61,5 +60,5 @@ bool pathValidator(string &pathToValid){
         return false;
     }
 
-    return 0;
+    return false;
 }
