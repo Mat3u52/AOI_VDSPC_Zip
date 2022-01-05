@@ -6,34 +6,34 @@
 using namespace std;
 namespace fs = filesystem;
 
-struct stat st;
-string year = "";
-string mounth = "";
+bool pathValidator(string &pathToValid);
 
 int main(){
+    string year = "";
+    string mounth = "";
+
     cout<<"[step 1.] Please, provide year:";
     cin>>year;
     cout<<endl;
     cout<<"[step 2.] Please, provide mounth:";
     cin>>mounth;
+
     //string path = year+"\\"+mounth;
-    string pathScr = "\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\"+year+"\\"+mounth; /// source
-    char pathCharScr[pathScr.length()+1];
-    strcpy(pathCharScr, pathScr.c_str());
+    string pathSource = "\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\"+year+"\\"+mounth; /// source
 
-    string pathDes = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth; /// destination
-    char pathCharDes[pathDes.length()+1];
-    strcpy(pathCharDes, pathDes.c_str());
 
-    if(stat(pathCharScr, &st) == 0){
+    string pathDestination = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth; /// destination
+
+
+    if(pathValidator(pathSource) == true){
         //for(const auto& entry : fs::directory_iterator(year+"\\"+mounth+"\\")){ ///source
-        for(const auto& entry : fs::directory_iterator("\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\"+year+"\\"+mounth+"\\")){ ///source
+        for(const auto& entry : fs::directory_iterator(pathSource+"\\")){ ///source
             const auto filenameStr = entry.path().filename().string();
             if(entry.is_directory()){
                 cout<<"dir:  "<<filenameStr<<endl;
-                ///add feature to create a new dir on the tcznt100\vitrox_aoi_backup
-                if(stat(pathCharDes, &st) != 0){
-                    fs::create_directory(pathDes);
+
+                if(pathValidator(pathDestination) == false){
+                    fs::create_directory(pathDestination);
                 }
                 //string pathSnD = "powershell Compress-Archive -Path \""+year+"\\"+mounth+"\\"+filenameStr+"\" -DestinationPath \""+year+"\\"+mounth+"\\"+filenameStr+".zip\"";
                 string pathSnD = "powershell Compress-Archive -Path \"\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\"+year+"\\"+mounth+"\\"+filenameStr+"\" -DestinationPath \"\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth+"\\"+filenameStr+".zip\"";
@@ -46,5 +46,20 @@ int main(){
             }
         }
     }
+
+    return 0;
+}
+
+bool pathValidator(string &pathToValid){
+    struct stat st;
+    char pathChar[pathToValid.length()+1];
+    strcpy(pathChar, pathToValid.c_str());
+
+    if(stat(pathChar, &st) == 0){
+        return true;
+    }else{
+        return false;
+    }
+
     return 0;
 }
