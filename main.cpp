@@ -1,14 +1,17 @@
+#include "dllVDSPC.h"
 #include <iostream>
 #include <string>
 #include <filesystem>
-#include <sys/stat.h>
+//#include <sys/stat.h>
+//#include <windows.h>
 
 using namespace std;
 namespace fs = filesystem;
 
-bool pathValidator(string &pathToValid);
+//bool pathValidator(string &pathToValid);
 
 int main(){
+    DllClass object;
     string year = "";
     string mounth = "";
 
@@ -24,14 +27,16 @@ int main(){
     string pathDestination = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth; /// destination
 
 
-    if(pathValidator(pathSource) == true){
+    //if(pathValidator(pathSource) == true){
+    if(object.pathValidator(pathSource) == true){
         //for(const auto& entry : fs::directory_iterator(year+"\\"+mounth+"\\")){ ///source
         for(const auto& entry : fs::directory_iterator(pathSource+"\\")){ ///source
             const auto filenameStr = entry.path().filename().string();
             if(entry.is_directory()){
                 cout<<"dir:  "<<filenameStr<<endl;
 
-                if(pathValidator(pathDestination) == false){
+                //if(pathValidator(pathDestination) == false){///
+                if(object.pathValidator(pathDestination) == false){
                     fs::create_directory(pathDestination);
                 }
                 //string pathSnD = "powershell Compress-Archive -Path \""+year+"\\"+mounth+"\\"+filenameStr+"\" -DestinationPath \""+year+"\\"+mounth+"\\"+filenameStr+".zip\"";
@@ -48,7 +53,7 @@ int main(){
 
     return 0;
 }
-
+/*
 bool pathValidator(string &pathToValid){
     struct stat st;
     char pathChar[pathToValid.length()+1];
@@ -62,3 +67,4 @@ bool pathValidator(string &pathToValid){
 
     return false;
 }
+*/
