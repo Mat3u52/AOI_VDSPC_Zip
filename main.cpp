@@ -2,13 +2,9 @@
 #include <iostream>
 #include <string>
 #include <filesystem>
-//#include <sys/stat.h>
-//#include <windows.h>
 
 using namespace std;
 namespace fs = filesystem;
-
-//bool pathValidator(string &pathToValid);
 
 int main(){
     DllClass object;
@@ -53,18 +49,3 @@ int main(){
 
     return 0;
 }
-/*
-bool pathValidator(string &pathToValid){
-    struct stat st;
-    char pathChar[pathToValid.length()+1];
-    strcpy(pathChar, pathToValid.c_str());
-
-    if(stat(pathChar, &st) == 0){
-        return true;
-    }else{
-        return false;
-    }
-
-    return false;
-}
-*/

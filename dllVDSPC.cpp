@@ -1,15 +1,13 @@
 #include "dllVDSPC.h"
-#include <windows.h>
 #include <sys/stat.h>
+#include <windows.h>
+#include <string>
 using namespace std;
-//DllClass::DllClass(std::string &pathToValid){
-//    std::string pathToValidOK = pathToValid;
-//}
+
 DllClass::DllClass(){
 }
 DllClass::~DllClass(){
 }
-
 bool DllClass::pathValidator(string &pathToValid){
     struct stat st;
     char pathChar[pathToValid.length()+1];
