@@ -4,22 +4,37 @@
 #include <string>
 using namespace std;
 
-DllClass::DllClass(){
+DllClass::DllClass(const string &s, const string &d){
+    if(s.length() > 0 && d.length() > 0){
+        source = s;
+        destination = d;
+    }
 }
 DllClass::~DllClass(){
 }
-bool DllClass::pathValidator(string &pathToValid){
+bool DllClass::pathValidatorSource(void){
     struct stat st;
-    char pathChar[pathToValid.length()+1];
-    strcpy(pathChar, pathToValid.c_str());
+    char pathChar[source.length()+1];
+    strcpy(pathChar, source.c_str());
 
     if(stat(pathChar, &st) == 0){
         return true;
     }else{
         return false;
     }
+return false;
+}
+bool DllClass::pathValidatorDestination(void){
+    struct stat st;
+    char pathChar[destination.length()+1];
+    strcpy(pathChar, destination.c_str());
 
-    return false;
+    if(stat(pathChar, &st) == 0){
+        return true;
+    }else{
+        return false;
+    }
+return false;
 }
 
 BOOL APIENTRY DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved){

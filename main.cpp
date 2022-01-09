@@ -7,7 +7,6 @@ using namespace std;
 namespace fs = filesystem;
 
 int main(){
-    DllClass object;
     string year = "";
     string mounth = "";
 
@@ -22,9 +21,9 @@ int main(){
 
     string pathDestination = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth; /// destination
 
-
+    DllClass objectVDSPC(pathSource, pathDestination);
     //if(pathValidator(pathSource) == true){
-    if(object.pathValidator(pathSource) == true){
+    if(objectVDSPC.pathValidatorSource() == true){
         //for(const auto& entry : fs::directory_iterator(year+"\\"+mounth+"\\")){ ///source
         for(const auto& entry : fs::directory_iterator(pathSource+"\\")){ ///source
             const auto filenameStr = entry.path().filename().string();
@@ -32,7 +31,7 @@ int main(){
                 cout<<"dir:  "<<filenameStr<<endl;
 
                 //if(pathValidator(pathDestination) == false){///
-                if(object.pathValidator(pathDestination) == false){
+                if(objectVDSPC.pathValidatorDestination() == false){
                     fs::create_directory(pathDestination);
                 }
                 //string pathSnD = "powershell Compress-Archive -Path \""+year+"\\"+mounth+"\\"+filenameStr+"\" -DestinationPath \""+year+"\\"+mounth+"\\"+filenameStr+".zip\"";
