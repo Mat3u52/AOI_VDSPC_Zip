@@ -13,10 +13,13 @@ using namespace std;
 
 class DllClass{
     public:
-        DllClass();
+        DllClass(const string&, const string&);
         virtual ~DllClass(void);
 
-        bool pathValidator(string&);
+        bool pathValidatorSource(void);
+        bool pathValidatorDestination(void);
     private:
+        string source;
+        string destination;
 };
 #endif /* _DLL_H_ */
