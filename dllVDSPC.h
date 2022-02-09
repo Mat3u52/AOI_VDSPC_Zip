@@ -18,6 +18,7 @@ class DllClass{
 
         bool pathValidatorSource(void);
         bool pathValidatorDestination(void);
+        void cleanUp(void);
     private:
         string source;
         string destination;
