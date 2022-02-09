@@ -36,6 +36,9 @@ bool DllClass::pathValidatorDestination(void){
     }
 return false;
 }
+void DllClass::cleanUp(void){
+
+}
 
 BOOL APIENTRY DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved){
     switch(reason){
