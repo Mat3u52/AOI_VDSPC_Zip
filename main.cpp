@@ -22,6 +22,8 @@ int main(){
     string pathDestination = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\"+year+"\\"+mounth; /// destination
 
     DllClass objectVDSPC(pathSource, pathDestination);
+
+    objectVDSPC.cleanUp(year, mounth);
     //if(pathValidator(pathSource) == true){
     if(objectVDSPC.pathValidatorSource() == true){
         //for(const auto& entry : fs::directory_iterator(year+"\\"+mounth+"\\")){ ///source

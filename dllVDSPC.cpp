@@ -2,6 +2,7 @@
 #include <sys/stat.h>
 #include <windows.h>
 #include <string>
+#include <iostream>
 using namespace std;
 
 DllClass::DllClass(const string &s, const string &d){
@@ -36,8 +37,27 @@ bool DllClass::pathValidatorDestination(void){
     }
 return false;
 }
-void DllClass::cleanUp(void){
+void DllClass::cleanUp(const string &y, const string &m){
+    int month = stoi(m);
+    int year = stoi(y);
 
+    switch(month){
+    case 1:
+        year =- 1;
+        char yearStr[10];
+        itoa(year,yearStr,10);
+        cout << yearStr << " " << "12" << endl;
+        break;
+    case 2:
+        month =- 1;
+        char monthStr[10];
+        itoa(month,monthStr,10);
+        cout << y << " " << monthStr << endl;
+        break;
+    case 3:
+        cout << y << " " << m << endl;
+        break;
+    }
 }
 
 BOOL APIENTRY DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved){
