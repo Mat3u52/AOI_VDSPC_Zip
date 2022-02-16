@@ -10,6 +10,7 @@ int main(){
     string year = "";
     string mounth = "";
     const string IPS = "\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\";
+    //const string IPS = "C:\\01\\";
     const string IPD = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\";
 
     cout<<"[step 1.] Please, provide year:";
@@ -56,19 +57,17 @@ int main(){
     string pathDestinationRemove = IPD+""+objectVDSPC.cleanUp(year, mounth); /// destination (not important)
     //if(pathValidator(pathSource) == true){
     //if(objectVDSPC.pathValidatorSource() == true){
-    cout << pathSourceRemove << endl;
+    //cout << pathSourceRemove << endl;
     //cout << pathDestinationRemove << endl;
     DllClass objectVDSPCRemove(pathSourceRemove, pathDestinationRemove);
     if(objectVDSPCRemove.pathValidatorSource() == true){
         cout << "Exist." << endl;
-        /*
         for(const auto& entry : fs::directory_iterator(pathSourceRemove+"\\")){ ///source
             const auto filenameStr = entry.path().filename().string();
             if(entry.is_directory()){
                 cout<<"dir:  "<<filenameStr<<endl;
 
-                fs::remove_all("C:\\01\\01");
-
+                fs::remove_all(pathSourceRemove+"\\"+filenameStr);
 
             }else if (entry.is_regular_file()){
                 cout<<"file: "<<filenameStr<<endl;
@@ -76,9 +75,6 @@ int main(){
                 cout<<"?? "<<filenameStr<<endl;
             }
         }
-        */
-    }else{
-        cout << "The path not exist." << endl;
     }
 
     return 0;
