@@ -10,7 +10,6 @@ int main(){
     string year = "";
     string mounth = "";
     const string IPS = "\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\";
-    //const string IPS = "C:\\01\\";
     const string IPD = "\\\\tcznt100\\VITROX_AOI_ZIPPED_FILES\\vdspc_image\\";
 
     cout<<"[step 1.] Please, provide year:";
@@ -22,12 +21,10 @@ int main(){
     //string path = year+"\\"+mounth;
     //string pathSource = "\\\\tcznt100\\VITROX_AOI_BACKUP\\vdspc_image\\"+year+"\\"+mounth; /// source
     string pathSource = IPS+""+year+"\\"+mounth; /// source
-
     string pathDestination = IPD+""+year+"\\"+mounth; /// destination
 
     DllClass objectVDSPC(pathSource, pathDestination);
 
-    //if(pathValidator(pathSource) == true){
     if(objectVDSPC.pathValidatorSource() == true){
         //for(const auto& entry : fs::directory_iterator(year+"\\"+mounth+"\\")){ ///source
         for(const auto& entry : fs::directory_iterator(pathSource+"\\")){ ///source
@@ -35,7 +32,6 @@ int main(){
             if(entry.is_directory()){
                 cout<<"dir:  "<<filenameStr<<endl;
 
-                //if(pathValidator(pathDestination) == false){///
                 if(objectVDSPC.pathValidatorDestination() == false){
                     fs::create_directory(pathDestination);
                 }
@@ -53,12 +49,8 @@ int main(){
     }
 
     string pathSourceRemove = IPS+""+objectVDSPC.cleanUp(year, mounth); /// source
-
     string pathDestinationRemove = IPD+""+objectVDSPC.cleanUp(year, mounth); /// destination (not important)
-    //if(pathValidator(pathSource) == true){
-    //if(objectVDSPC.pathValidatorSource() == true){
-    //cout << pathSourceRemove << endl;
-    //cout << pathDestinationRemove << endl;
+
     DllClass objectVDSPCRemove(pathSourceRemove, pathDestinationRemove);
     if(objectVDSPCRemove.pathValidatorSource() == true){
         cout << "Exist." << endl;
